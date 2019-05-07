@@ -10,3 +10,15 @@ export const HOME_PAGE = gql`
     }
   }
 `;
+
+// It is not Graphql query, use apollo
+export const MOVIE_DETAILS = gql`
+query getMovieDetails($movieId: Int!){
+  movieDetails(id: $movieId) {
+    id
+    title
+    description_intro
+    medium_cover_image
+  }
+}
+`;
