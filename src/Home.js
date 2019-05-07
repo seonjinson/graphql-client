@@ -1,14 +1,33 @@
 import React from 'react';
 import { Query } from 'react-apollo';
+import styled from 'styled-components';
 import { HOME_PAGE } from './queries';
+import Movie from './Movie';
+
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 0.7fr);
+  flex-wrap: wrap;
+  justify-items: center;
+`;
 
 const Home = () => (
-  <Query query={HOME_PAGE}>{({ loading, data, error }) => {
-    if (loading) return 'loading';
-    if (error) return 'somthing happened';
-    return data.fetchMovies.map(movie => <h2 key={movie.id}>{movie.title} / {movie.rating}</h2>);
-  }}
-  </Query>
+  <Container>
+    <Query query={HOME_PAGE}>{({ loading, data, error }) => {
+      if (loading) return 'loading';
+      if (error) return 'somthing happened';
+      return data.fetchMovies.map(movie => (
+        <Movie
+          id={movie.id}
+          key={movie.id}
+          poster={movie.medium_cover_image}
+          title={movie.title}
+          rating={movie.rating}
+        />
+      ));
+    }}
+    </Query>
+  </Container>
 );
 
 export default Home;

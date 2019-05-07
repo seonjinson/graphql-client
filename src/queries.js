@@ -6,6 +6,7 @@ export const HOME_PAGE = gql`
       id
       title
       rating
+      medium_cover_image
     }
   }
 `;
